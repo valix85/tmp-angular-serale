@@ -1,7 +1,18 @@
 <h1>{{ titolo }}</h1>
-<label for="">Titolo: </label>
-<input type="text" [(ngModel)]="titolo">
-<br>
+
+<form #f="ngForm" (submit)="saveTodo(f)">
+    <label for="label">Cosa fare: </label>
+    <input name="label" type="text" [ngModel]="todo.label" required>
+    <br>
+    <label for="qta">Qta: </label>
+    <input name="qta" type="number" [ngModel]="todo.qta">
+    <br>
+    <input name="id" type="hidden" [ngModel]="todo.id">
+    <button type="submit" [disabled]="f.invalid">➕ ADD</button>
+    <button type="reset">🧹</button>
+</form>
+
+<hr>
 
 
 
@@ -18,7 +29,7 @@
         <button *ngIf="!azione.complete" (click)="azione.complete=!azione.complete">✔</button>
         <button *ngIf="azione.complete" (click)="azione.complete=!azione.complete">❌</button>
         
-        <button (click)="metodo(azione)">💩</button>
+        <button (click)="cancella(azione)">🗑</button>
         </li>
     </ul>
 </div>
