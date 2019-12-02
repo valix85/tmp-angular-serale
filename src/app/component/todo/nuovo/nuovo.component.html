@@ -1,0 +1,23 @@
+<form #f="ngForm" (submit)="saveTodo(f)">
+  <label for="label">Cosa fare: </label>
+  <input name="label" type="text" [ngModel]="todo.label" required>
+  <br>
+  <label for="qta">Qta: </label>
+  <input name="qta" type="number" [ngModel]="todo.qta">
+  <br>
+  <input name="id" type="hidden" [ngModel]="todo.id">
+  
+
+  <span *ngIf="todo.id">
+    <br>
+    Completato: 
+    <input name="complete" type="checkbox" [ngModel]="todo.complete" >
+    <br>
+  </span>
+
+  <button type="submit" [disabled]="f.invalid" *ngIf="!todo.id">➕ ADD</button>
+  <button type="submit" [disabled]="f.invalid" *ngIf="todo.id">👌 SAVE</button>  
+  
+  
+  <button type="reset" *ngIf="!todo.id">🧹</button>
+</form>

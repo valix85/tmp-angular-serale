@@ -1,0 +1,20 @@
+{
+    "todo": [
+        {
+            "id": 1,
+            "label": "tonno",
+            "qta": 5,
+            "complete": false
+        },{
+            "id": 2,
+            "label": "latte",
+            "qta": 1,
+            "complete": false
+        },{
+            "id": 3,
+            "label": "maionese",
+            "qta": 20,
+            "complete": true
+        }
+    ]
+}

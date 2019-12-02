@@ -1,40 +1,6 @@
+<!-- NAVBAR -->
+<nxt-navbar></nxt-navbar>
 <h1>{{ titolo }}</h1>
-
-<form #f="ngForm" (submit)="saveTodo(f)">
-    <label for="label">Cosa fare: </label>
-    <input name="label" type="text" [ngModel]="todo.label" required>
-    <br>
-    <label for="qta">Qta: </label>
-    <input name="qta" type="number" [ngModel]="todo.qta">
-    <br>
-    <input name="id" type="hidden" [ngModel]="todo.id">
-    <button type="submit" [disabled]="f.invalid">➕ ADD</button>
-    <button type="reset">🧹</button>
-</form>
-
 <hr>
-
-
-
-<div *ngIf="daFare.length > 0">
-    <h1>Da Fare: {{getQta()}} </h1>
-    <ul>
-        <!-- [ngClass]="azione.qta>1?'rosso bold':'blu'" -->
-        <li *ngFor="let azione of daFare; let idx = index"         
-        
-        [ngClass]="{'rosso bold':azione.qta>2, 'blu':azione.qta<=2, 'stroke':azione.complete}"
-
-        >
-        {{idx+1}} - Devi comprare: {{azione.label}} [{{azione.qta}}] 
-        <button *ngIf="!azione.complete" (click)="azione.complete=!azione.complete">✔</button>
-        <button *ngIf="azione.complete" (click)="azione.complete=!azione.complete">❌</button>
-        
-        <button (click)="cancella(azione)">🗑</button>
-        </li>
-    </ul>
-</div>
-<hr>
-<pre>{{ daFare | json }}</pre>
-
-
+<!-- LISTA  |  SINGOLO TODO --> 
 <router-outlet></router-outlet>

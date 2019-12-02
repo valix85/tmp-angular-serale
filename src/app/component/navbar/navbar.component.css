@@ -1,0 +1,22 @@
+a {
+    padding:4px 8px;
+    box-sizing: border-box;
+    margin: 0 5px;
+}
+
+nav {
+    text-align: center;
+}
+
+nav a {
+    text-decoration: none;    
+}
+a:hover, a:active {
+    text-decoration: none;    
+    background: #CCC;
+}
+
+.active {
+    background: yellow;
+    font-weight: bold;
+}

@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+.rosso {
+    color:red;
+}
+.blu {
+    color: #0000DD;
+}
+.bold {
+    font-weight: bold;
+}
+.stroke {
+    text-decoration: line-through;
+}
