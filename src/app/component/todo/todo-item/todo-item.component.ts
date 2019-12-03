@@ -15,8 +15,12 @@ export class TodoItemComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
-    this.todo = this.todoService.getTodo(parseInt(id, 10));
+    console.log('Todo id: ', id);
+    this.todoService.getTodo(parseInt(id, 10)).subscribe(
+      risp => {
+        console.log(risp);
+        this.todo = risp;}
+    );
   }
 
   doUpdate(evento: any): void {

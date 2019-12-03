@@ -15,12 +15,16 @@ export class TodoElencoComponent implements OnInit {
   constructor(private todoService: TodoService, private router: Router) { }
 
   ngOnInit() {
+    this.caricaTodo();
+    console.log('nxt-todo-elenco init');
+  }
+
+  caricaTodo() {
     this.todoService.getTodos().subscribe(
       risp => {this.daFare = risp; },
       err => {console.error(err); },
       () => {console.log('finito'); }
     );
-    console.log('nxt-todo-elenco init');
   }
 
   getQta(): number {
@@ -33,10 +37,17 @@ export class TodoElencoComponent implements OnInit {
     if (result) {
       // cancello dalla lista, opero sulla lista originale, non su una sua copia!
       // this.daFare = this.daFare.filter(elem => elem !== item);
+      /*
       const idx = this.daFare.findIndex(elem => elem === item);
       if (idx >= 0) {
         this.daFare.splice(idx, 1);
       }
+      */
+
+      this.todoService.deleteTodo(item.id)
+      .subscribe(
+        risp => this.caricaTodo()
+      );
     }
   } // end cancella
 

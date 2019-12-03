@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { TodoService } from 'src/app/service/todo.service';
 import { NgForm } from '@angular/forms';
 import { Todo } from 'src/app/model/todo';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './nuovo.component.html',
   styleUrls: ['./nuovo.component.css']
 })
-export class NuovoComponent implements OnInit {
+export class NuovoComponent implements OnInit, OnChanges {
 
   todo: Todo = new Todo();
   @Input() value: Todo;
@@ -19,6 +19,15 @@ export class NuovoComponent implements OnInit {
 
   ngOnInit() {
     console.log('nxt-nuovo init');
+    if (this.value) {
+      this.todo = this.value;
+    } else {
+      this.todo.qta = 1;
+    }
+  }
+
+  ngOnChanges() {
+    console.log('nxt-nuovo change');
     if (this.value) {
       this.todo = this.value;
     } else {
@@ -44,19 +53,31 @@ export class NuovoComponent implements OnInit {
         const newId = 1 + Math.max.apply(Math, ok.map(o => o.id ));
         item.id = newId;
         item.complete = false;
-        console.log(item);
-        this.todoService.addTodo(item);
-        this.router.navigateByUrl('/');
+        console.log('Todo da salvare', item);
+        this.todoService.addTodo(item).subscribe(
+          risp => {
+            console.log('Todo Salvato', risp);
+            this.router.navigateByUrl('/');
+          },
+          error => {
+            console.log(error);
+            alert('Errore di comunicazione');
+          }
+        );
+
       }
     );
   }
 
   updateTodo(item: Todo): void {
     console.log(item);
-    this.todoService.updateTodo(item);
+    this.todoService.updateTodo(item).subscribe(
+      risp => {
+        console.log(risp);
+        this.todoUpdateEvent.emit({action: 'UPDATE', state: 'OK', value: item});
+      }
+    );
     // this.router.navigateByUrl('/'); //versione facile e diretta
-    this.todoUpdateEvent.emit({action: 'UPDATE', state: 'OK', value: item});
-
   }
 
 

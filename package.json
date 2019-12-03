@@ -1,7 +1,7 @@
 {
   "name": "demo1",
   "version": "0.0.0",
-  "scripts": {    
+  "scripts": {
     "server": "json-server --watch src/server/db.json",
     "ng": "ng",
     "start": "ng serve -o",
