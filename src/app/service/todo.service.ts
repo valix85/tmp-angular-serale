@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError, timer } from 'rxjs';
 import { catchError, tap, retry, retryWhen, delayWhen, finalize, count } from 'rxjs/operators';
 import { isNgTemplate } from '@angular/compiler';
+import { environment as env } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,24 +16,24 @@ export class TodoService {
 
   getTodos(): Observable<Todo[]> {
     // return [...todosMock];
-    return this.http.get<Todo[]>('http://localhost:3000/todo/');
+    return this.http.get<Todo[]>(env.url + '/todo/');
   }
 
   getTodo(id: number): Observable<Todo> {
     // return todosMock.find(el => el.id === id);
-    return this.http.get<Todo>('http://localhost:3000/todo/' + id);
+    return this.http.get<Todo>(env.url + '/todo/' + id);
   }
 
   deleteTodo(id: number): Observable<any> {
     return this.http.delete(
-      'http://localhost:3000/todo/' + id
+      env.url + '/todo/' + id
       );
   }
 
   addTodo(item: Todo): Observable<Todo> {
     // todosMock.push(item);
     return this.http.post<Todo>(
-      'http://localhost:3000/todo/',
+      env.url + '/todo/',
       item
     ).pipe(
       /*
@@ -59,7 +60,7 @@ export class TodoService {
     todosMock[idx] = {...item};
     */
     return this.http.put<Todo>(
-      'http://localhost:3000/todo/' + item.id,
+      env.url + '/todo/' + item.id,
       item
       );
   }

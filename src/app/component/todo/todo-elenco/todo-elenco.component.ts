@@ -21,9 +21,9 @@ export class TodoElencoComponent implements OnInit {
 
   caricaTodo() {
     this.todoService.getTodos().subscribe(
-      risp => {this.daFare = risp; },
-      err => {console.error(err); },
-      () => {console.log('finito'); }
+      risp => { this.daFare = risp; },
+      err => { console.error(err); },
+      () => { console.log('finito'); }
     );
   }
 
@@ -45,17 +45,32 @@ export class TodoElencoComponent implements OnInit {
       */
 
       this.todoService.deleteTodo(item.id)
-      .subscribe(
-        risp => this.caricaTodo()
-      );
+        .subscribe(
+          risp => this.caricaTodo()
+        );
     }
   } // end cancella
 
 
   info(item: Todo) {
-      if (item && item.id != null) {
-        this.router.navigateByUrl('todo/' + item.id);
+    if (item && item.id != null) {
+      this.router.navigateByUrl('todo/' + item.id);
+    }
+  }
+
+  setComplete(item: Todo, state: boolean): void {
+    // item.complete = state;
+    const newItem: Todo = {...item, ...{complete: state}};
+    this.todoService.updateTodo(newItem).subscribe(
+      // risp => this.caricaTodo()
+      // risp => item.complete = risp.complete
+      risp => {
+        // trovo dentro a this.daFare l'indice dell'item originale da aggiornare
+        const idx = this.daFare.findIndex(el => el.id === risp.id);
+        // sostituisco all'item originale i nuovi valori
+        this.daFare[idx] = risp;
       }
+    );
   }
 
 } // end class

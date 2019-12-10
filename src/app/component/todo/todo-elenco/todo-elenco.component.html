@@ -1,17 +1,29 @@
 <div *ngIf="daFare.length > 0">
   <h1>Da Fare: {{getQta()}} </h1>
   <ul>
-      <!-- [ngClass]="azione.qta>1?'rosso bold':'blu'" -->
-      <li *ngFor="let azione of daFare; let idx = index"         
-      
-      [ngClass]="{'rosso bold':azione.qta>2, 'blu':azione.qta<=2, 'stroke':azione.complete}"
-
-      >
-      {{idx+1}} - Devi comprare: {{azione.label}} [{{azione.qta}}] 
+    <!-- [ngClass]="azione.qta>1?'rosso bold':'blu'" -->
+    <li *ngFor="let azione of daFare; let idx = index"
+      [ngClass]="{'rosso bold':azione.qta>2, 'blu':azione.qta<=2, 'stroke':azione.complete}">
+      {{idx+1}} - Devi comprare: {{azione.label}} [{{azione.qta}}]
+      <!--
       <button *ngIf="!azione.complete" (click)="azione.complete=!azione.complete">✔</button>
-      <button *ngIf="azione.complete" (click)="azione.complete=!azione.complete">❌</button>      
+      <button *ngIf="azione.complete" (click)="azione.complete=!azione.complete">❌</button>
+      -->
+
+
+
+      <button 
+      *ngIf="!azione.complete; else btn2" 
+      (click)="setComplete(azione, true)"
+      >✔</button>
+      <ng-template #btn2>
+        <button (click)="setComplete(azione, false)">❌</button>
+      </ng-template>
+
+
+
       <button (click)="cancella(azione)">🗑</button>
       <button (click)="info(azione)">📊</button>
-      </li>
+    </li>
   </ul>
 </div>

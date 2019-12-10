@@ -1,10 +1,10 @@
 {
   "todo": [
     {
-      "id": 1,
       "label": "tonno",
-      "qta": 5,
-      "complete": false
+      "qta": 500,
+      "id": 1,
+      "complete": true
     },
     {
       "id": 2,
@@ -22,12 +22,18 @@
       "label": "birra",
       "qta": 500,
       "id": 4,
-      "complete": true
+      "complete": false
     },
     {
-      "label": "carta iggienica",
+      "label": "birra rossa",
       "qta": 10,
       "id": 5,
+      "complete": false
+    },
+    {
+      "label": "sprite",
+      "qta": 1,
+      "id": 6,
       "complete": false
     }
   ]

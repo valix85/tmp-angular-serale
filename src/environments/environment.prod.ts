@@ -1,3 +1,5 @@
+const url = 'https://miosito.dev';
 export const environment = {
-  production: true
+  production: true,
+  url
 };
